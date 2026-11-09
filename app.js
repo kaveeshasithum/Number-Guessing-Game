@@ -1,185 +1,132 @@
+let userGuess;
 let count = 0;
-
 let Randomnumber = Math.floor(Math.random() * 10) + 1;
+function checkGuess() {
 
-let history = [];
-
-
-function checkGuess(){
-
-    let userGuess = document.getElementById("guessNumber").value;
-
-    if(userGuess == ""){
-        Swal.fire("Please enter a number");
-        return;
-    }
-
-    if(isNaN(userGuess) || userGuess < 1 || userGuess > 10){
-        Swal.fire("Please enter a number between 1 and 10");
-        return;
-    }
-
-    if(count < 3){
-
+    userGuess = document.getElementById("guessNumber").value;
+    if (count < 3) {
         console.log(userGuess);
         console.log(Randomnumber);
+        if (userGuess == Randomnumber) {
 
-        if(userGuess == Randomnumber){
-
+            corectnumber();
             let guess = {
                 randomNumber: Randomnumber,
                 userGuess: userGuess,
                 result: "Correct"
-            };
 
+            }
             history.push(guess);
-
-            corectnumber();
 
             count = 0;
-
             Randomnumber = Math.floor(Math.random() * 10) + 1;
 
-        }
 
-        else if(userGuess > Randomnumber){
-
+        } else if (userGuess > Randomnumber) {
             let guess = {
                 randomNumber: Randomnumber,
                 userGuess: userGuess,
-                result: "Wrong"
-            };
+                result: "Wrrong"
 
+            }
             history.push(guess);
+            largenum()
 
-            largenum();
-
-            count++;
+            count++
 
         }
-
-        else if(userGuess < Randomnumber){
-
+        else if (userGuess < Randomnumber) {
+            lowernum()
             let guess = {
                 randomNumber: Randomnumber,
                 userGuess: userGuess,
-                result: "Wrong"
-            };
+                result: "Wrrong"
 
+            }
             history.push(guess);
-
-            lowernum();
-
-            count++;
-
+            count++
         }
+        else {
 
-        guesthistory();
+            worongnumber()
+            let guess = {
+                randomNumber: Randomnumber,
+                userGuess: userGuess,
+                result: "Wrrong"
 
-        if(count == 3){
-
-            setTimeout(function(){
-
-                worongnumber();
-
-                count = 0;
-
-                Randomnumber = Math.floor(Math.random() * 10) + 1;
-
-            }, 1000);
-
+            }
+            history.push(guess);
+            count++
         }
+        guesthistory()
+
 
     }
+     if (count == 3) {
+        count = 0;
+        Randomnumber = Math.floor(Math.random() * 10) + 1;
+    }
 
-    document.getElementById("guessNumber").value = "";
 
 }
 
-
-// Correct Number Function
-
-function corectnumber(){
-
+function corectnumber() {
     Swal.fire({
-        title: "Congratulations!",
-        text: "Your guess is correct!",
+        title: "congratulations",
         icon: "success",
+
         draggable: true
     });
-
 }
 
-
-// Wrong Number Function
-
-function worongnumber(){
-
+function worongnumber() {
     Swal.fire({
         icon: "error",
-        title: "Game Over!",
-        text: "You have used all 3 chances!"
+        title: "You are guess is wrong number",
+        text: "Please try again",
+
+    });
+}
+function largenum() {
+    Swal.fire({
+        icon: "error",
+        title: "You are guess is wrong number",
+        text: "Greter Than the Ramdom Number",
+
+    });
+}
+function lowernum() {
+    Swal.fire({
+        icon: "error",
+        title: "You are guess is wrong number",
+        text: "Smaller Than the Ramdom Number",
+
     });
 
 }
 
+const history = [];
 
-// Greater Number Function
-
-function largenum(){
-
-    Swal.fire({
-        icon: "error",
-        title: "Wrong Number!",
-        text: "Greater Than the Random Number"
-    });
-
+let perHistory = {
+    randomNumber: Randomnumber,
+    userGuess: userGuess,
+    result: result
 }
 
+history.push(perHistory);
 
-// Smaller Number Function
-
-function lowernum(){
-
-    Swal.fire({
-        icon: "error",
-        title: "Wrong Number!",
-        text: "Smaller Than the Random Number"
-    });
-
-}
-
-
-// Guest History Function
-
-function guesthistory(){
-
-    let body = `
-        <tr>
-            <td>No</td>
-            <td>Random Number</td>
-            <td>User Guess</td>
-            <td>Result</td>
-        </tr>
-    `;
-
-    let i = 1;
-
-    for(let guess of history){
-
+function guesthistory() {
+    let body = "";
+    for (let i = 0; i < history.length; i++) {
+        let item = history[i];
         body += `
             <tr>
-                <td>${i}</td>
-                <td>${guess.randomNumber}</td>
-                <td>${guess.userGuess}</td>
-                <td>${guess.result}</td>
+                <td>${i + 1}</td>
+                <td>${item.randomNumber}</td>
+                <td>${item.userGuess}</td>
+                <td>${item.result}</td>
             </tr>
         `;
-
-        i++;
-
     }
-
     document.getElementById("History").innerHTML = body;
-
 }
