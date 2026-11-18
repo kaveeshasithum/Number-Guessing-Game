@@ -20,12 +20,9 @@
 </head>
 
 <body>
-
     <div class="container min-vh-100 d-flex justify-content-center align-items-center py-5">
 
         <div class="game-card shadow-lg">
-
-            <!-- Header -->
 
             <div class="text-center mb-4">
 
@@ -41,13 +38,9 @@
 
             </div>
 
-
-            <!-- Game Input -->
-
             <div class="game-input p-4 rounded-4 text-center mb-4">
 
                 <h5 class="fw-bold mb-3">Enter Your Guess</h5>
-
                 <input
                     type="number"
                     id="guessNumber"
@@ -56,84 +49,46 @@
                     min="1"
                     max="10"
                 >
-
                 <button
                     class="btn btn-primary btn-lg w-100"
                     onclick="checkGuess()">
-
                     <i class="fa-solid fa-magnifying-glass me-2"></i>
                     Check Number
-
                 </button>
-
             </div>
-
-
-            <!-- Attempts -->
 
             <div class="text-center mb-4">
-
                 <span class="badge bg-primary fs-6 p-3">
-
                     <i class="fa-solid fa-heart me-2"></i>
-
                     3 Chances Per Round
-
                 </span>
-
             </div>
 
-
-            <!-- History -->
-
             <div>
-
                 <h4 class="fw-bold mb-3">
-
                     <i class="fa-solid fa-clock-rotate-left text-primary me-2"></i>
-
                     Guess History
-
                 </h4>
-
                 <div class="table-responsive">
-
                     <table class="table table-hover text-center align-middle">
-
                         <thead class="table-primary">
-
                             <tr>
-
                                 <th>No</th>
 
                                 <th>User Guess</th>
 
                                 <th>Result</th>
-
                             </tr>
-
                         </thead>
-
                         <tbody id="history">
-
                         </tbody>
-
                     </table>
-
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
-
-    <!-- SweetAlert2 -->
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- JavaScript -->
 
     <script src="app.js"></script>
 
